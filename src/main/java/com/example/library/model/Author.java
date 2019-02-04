@@ -9,6 +9,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -25,7 +26,6 @@ public class Author extends BaseEntity
     @NotBlank
     @Size(min = 3)
     private String description;
-
 
     @Lob
     private Byte[] image;
@@ -82,4 +82,5 @@ public class Author extends BaseEntity
     {
         this.bookSet = bookSet;
     }
+
 }
