@@ -7,6 +7,7 @@ Date: 03.02.2019
 import com.example.library.model.Author;
 import com.example.library.repositories.AuthorRepository;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -28,7 +29,7 @@ public class AuthorServiceImpl implements AuthorService
     @Override
     public Set<Author> findAll()
     {
-        Set<Author> authorSet = new TreeSet<>();
+        Set<Author> authorSet = new HashSet<>();
         repository.findAll().forEach(authorSet::add);
 
         return authorSet;

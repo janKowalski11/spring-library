@@ -8,13 +8,13 @@ import com.example.library.model.Author;
 
 import java.util.Set;
 
-public  interface BasicCrudService<T,ID>
+public interface BasicCrudService<T, ID>
 {
-    T findById(Long ID);
+    T findById(ID id);
 
     Set<T> findAll();
 
-    T save(Author T);
+    T save(T obj);
 
-    void deleteById(Long ID);
+    void deleteById(ID id);
 }
