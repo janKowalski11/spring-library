@@ -34,7 +34,19 @@ public class Book extends BaseEntity
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id")
     )
-    private Set<Author> authorSet=new TreeSet<>();
+    private Set<Author> authorSet = new HashSet<>();
+
+    public Book addAuthor(Author author) throws IllegalArgumentException
+    {
+        if (author == null)
+            throw new IllegalArgumentException("author null");
+
+        author.getBookSet().add(this);
+        authorSet.add(author);
+
+        return this;
+
+    }
 
     public String getName()
     {

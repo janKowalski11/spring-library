@@ -31,7 +31,7 @@ public class Author extends BaseEntity
     private Byte[] image;
 
     @ManyToMany(mappedBy = "authorSet")
-    private Set<Book> bookSet = new TreeSet<>();
+    private Set<Book> bookSet = new HashSet<>();
 
     public String getFirstName()
     {

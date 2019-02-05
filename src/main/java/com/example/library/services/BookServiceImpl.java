@@ -7,12 +7,14 @@ Date: 04.02.2019
 import com.example.library.model.Author;
 import com.example.library.model.Book;
 import com.example.library.repositories.BookRepository;
+import org.springframework.stereotype.Component;
 
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
+@Component
 public class BookServiceImpl implements BookService
 {
     private final BookRepository bookRepository;

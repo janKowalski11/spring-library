@@ -6,11 +6,13 @@ Date: 03.02.2019
 
 import com.example.library.model.Author;
 import com.example.library.repositories.AuthorRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
+@Component
 public class AuthorServiceImpl implements AuthorService
 {
     private final AuthorRepository repository;
