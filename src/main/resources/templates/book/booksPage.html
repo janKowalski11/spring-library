@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<h1>NAVIGATION BAR SHOULD BE HERE</h1>
+<h2>Our Books</h2>
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Publisher</th>
+    </tr>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}"> -1</td>
+        <td><a th:text="${book.name}" th:href="@{'/book/' + ${book.id} + '/show/'}" style="color:#4CAF50"> </a></td>
+        <td th:text="${book.publisher}"> not found</td>
+    </tr>
+</table>
+
+</body>
+</html>
