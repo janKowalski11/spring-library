@@ -5,6 +5,7 @@ Date: 03.02.2019
 */
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
@@ -14,19 +15,20 @@ import java.util.TreeSet;
 @Entity
 public class Book extends BaseEntity
 {
-    @Size(min = 3)
+
     private String name;
 
-    @Lob
-    @NotBlank
-    @Size(min = 3)
+
     private String description;
 
-    @NotBlank
     private String publisher;
 
     @Lob
     private Byte[] image;
+
+    @Min(0)
+    private int availableBooks;
+
 
     @ManyToMany
     @JoinTable(
@@ -106,5 +108,15 @@ public class Book extends BaseEntity
     public void setAuthorSet(Set<Author> authorSet)
     {
         this.authorSet = authorSet;
+    }
+
+    public int getAvailableBooks()
+    {
+        return availableBooks;
+    }
+
+    public void setAvailableBooks(int availableBooks)
+    {
+        this.availableBooks = availableBooks;
     }
 }
