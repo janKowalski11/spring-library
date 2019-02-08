@@ -4,13 +4,18 @@ Author: BeGieU
 Date: 07.02.2019
 */
 
+
+
 import javax.persistence.Lob;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class BookCommand
 {
+    private Long id;
+
     @Size(min = 3)
     private String name;
 
@@ -19,11 +24,21 @@ public class BookCommand
     @Size(min = 3)
     private String description;
 
-    @NotBlank
     private String publisher;
 
-    @Pattern(regexp ="^[A-Za-z]*$")
+    @Pattern(regexp = "^[A-Za-z,]*$")
     private String authorLastName;
+
+
+    public Long getId()
+    {
+        return id;
+    }
+
+    public void setId(Long id)
+    {
+        this.id = id;
+    }
 
     public String getName()
     {

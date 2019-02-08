@@ -18,7 +18,7 @@ public class Book extends BaseEntity
 
     private String name;
 
-
+    @Lob
     private String description;
 
     private String publisher;
