@@ -4,6 +4,7 @@ Author: BeGieU
 Date: 05.02.2019
 */
 
+import com.example.library.Converters.BookCommandToBook;
 import com.example.library.commands.BookCommand;
 import com.example.library.model.Book;
 import com.example.library.services.BookService;
@@ -22,10 +23,14 @@ import java.util.TreeSet;
 public class BookController
 {
     private final BookService bookService;
+    private final BookCommandToBook bookCommandToBook;
 
-    public BookController(BookService bookService)
+    private static final String RECIPE_RECIPEFORM_URL = "book/createOrUpdateBookForm";
+
+    public BookController(BookService bookService, BookCommandToBook bookCommandToBook)
     {
         this.bookService = bookService;
+        this.bookCommandToBook = bookCommandToBook;
     }
 
     @InitBinder
@@ -54,14 +59,25 @@ public class BookController
     public String initCreationForm(Model model)
     {
         model.addAttribute("book", new BookCommand());
-        return "book/createOrUpdateBookForm";
+        return RECIPE_RECIPEFORM_URL;
     }
 
     @PostMapping("/saveOrUpdate")
-    public String saveOrUpdate(@Valid @ModelAttribute("book") BookCommand book,
-                                      BindingResult bindingResult)
+    public String saveOrUpdate(@Valid @ModelAttribute("book") BookCommand bookCommand,
+                               BindingResult bindingResult)
     {
-        return null;
+        if (bindingResult.hasErrors())
+        {
+            bindingResult.getAllErrors().forEach(objectError ->
+            {
+                System.out.println(objectError.toString());
+            });
+            return RECIPE_RECIPEFORM_URL;
+        }
+
+        Book savedBook = bookService.save(bookCommandToBook.convert(bookCommand));
+
+        return "redirect:/book/" + savedBook.getId() + "/show";
     }
 
 
