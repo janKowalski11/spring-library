@@ -66,6 +66,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>
 
 
         book1.addAuthor(author2);
+        book1.addAuthor(author1);
         book2.addAuthor(author1);
 
         authorService.save(author1);

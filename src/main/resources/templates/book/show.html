@@ -29,7 +29,8 @@
                             </div>
                             <div class="col-md-1">
                                 <a class="btn btn-default" href="#"
-                                   th:href="@{'/book/' + ${book.id} + '/image'}" th:method="get" role="button" >Change Image</a>
+                                   th:href="@{'/book/' + ${book.id} + '/image'}" th:method="get" role="button">Change
+                                    Image</a>
                             </div>
                         </div>
                     </div>
@@ -42,8 +43,9 @@
                                 <ul>
                                     <li th:remove="all">author one</li>
                                     <li th:remove="all">author two</li>
-                                    <li th:each="author : ${book.authorSet}"
-                                        th:text="${author.lastName}">cat three
+                                    <li th:each="author : ${book.authorSet}">
+                                        <a th:text="${author.lastName}"
+                                           th:href="@{'/author/' + ${author.id} + '/show/'}"></a>
                                     </li>
                                 </ul>
                             </div>
