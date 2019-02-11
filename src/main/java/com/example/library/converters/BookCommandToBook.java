@@ -1,4 +1,4 @@
-package com.example.library.Converters;
+package com.example.library.converters;
 /*
 Author: BeGieU
 Date: 08.02.2019
@@ -8,6 +8,7 @@ import com.example.library.commands.BookCommand;
 import com.example.library.model.Author;
 import com.example.library.model.Book;
 import com.example.library.services.AuthorService;
+import com.example.library.services.AuthorServiceImpl;
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,6 @@ import java.util.Set;
 @Component
 public class BookCommandToBook implements Converter<BookCommand, Book>
 {
-
     private final AuthorService authorService;
 
     public BookCommandToBook(AuthorService authorService)
@@ -26,19 +26,24 @@ public class BookCommandToBook implements Converter<BookCommand, Book>
         this.authorService = authorService;
     }
 
-    private Set<Author> getAuthorSet(BookCommand bookCommand)
+    public Set<Author> getAuthorSet(BookCommand bookCommand)
     {
-        //todo test this, here is error
+        //todo write test fot this,
 
         String lastNames = bookCommand.getAuthorLastName();
-        if (lastNames == null)
+        if (lastNames == null || lastNames.equals("") || lastNames.length() == 0)
             return null;
 
-        /* it's Necessary to find last name; */
-        lastNames = lastNames + ',';
+        int indexOfLastChar = lastNames.length() - 1;
+        if (Character.isLetter(lastNames.charAt(indexOfLastChar)))
+        {
+            /*colonel on the end of string is compulsory for below while loop to work properly
+            * so we add it if it is not present. Notice that this string is validated by
+            * @valid and it passes validation when it contains letters and colonels only*/
+            lastNames = lastNames + ',';
+        }
 
         Set<Author> authorSet = new HashSet<>();
-
 
         int beginIndex = 0;
         int endIndex;
@@ -46,11 +51,13 @@ public class BookCommandToBook implements Converter<BookCommand, Book>
         while (endIndex != -1)
         {
             String foundLastName = lastNames.substring(beginIndex, endIndex);
+
             Author foundAuthor = authorService.findAuthorByLastName(foundLastName);
             authorSet.add(foundAuthor);
 
-            beginIndex = endIndex;
+            beginIndex = endIndex + 1;
             endIndex = lastNames.indexOf(',', beginIndex);
+
         }
 
         return authorSet;
@@ -72,5 +79,19 @@ public class BookCommandToBook implements Converter<BookCommand, Book>
 
         return book;
     }
+
+    public static void main(String[] args)
+    {
+        final String authorLastNames = "Mickiewicz,Zulczyk";
+
+        BookCommand bookCommand = new BookCommand();
+        bookCommand.setDescription("ESSSSSA");
+        bookCommand.setName("CSACASCAS");
+        bookCommand.setPublisher("SAsasasasas");
+        bookCommand.setAuthorLastName(authorLastNames);
+
+
+    }
+
 
 }

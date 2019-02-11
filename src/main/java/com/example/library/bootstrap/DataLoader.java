@@ -47,7 +47,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>
 
         Author author1=new Author();
         author1.setFirstName("Jakub");
-        author1.setLastName("Żulczyk");
+        author1.setLastName("Zulczyk");
         author1.setDesctiption("Popularny pisarz młodego pokolenia. Urodzony w Szczytnie, ukończył studia dziennikarskie" +
                 "na UJ. Współpracownik pism „Lampa” i „Machina”, twórca rubryki „Tydzień kultury polskiej” w tygodniku" +
                 " „Wprost”. Autor czterech powieści, z których dwie ostatnie – \"Instytut\" i \"Zmorojewo\" wpisują się" +

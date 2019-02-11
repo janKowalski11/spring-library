@@ -4,7 +4,7 @@ Author: BeGieU
 Date: 05.02.2019
 */
 
-import com.example.library.Converters.BookCommandToBook;
+import com.example.library.converters.BookCommandToBook;
 import com.example.library.commands.BookCommand;
 import com.example.library.model.Book;
 import com.example.library.services.BookService;
@@ -26,6 +26,7 @@ public class BookController
     private final BookCommandToBook bookCommandToBook;
 
     private static final String RECIPE_RECIPEFORM_URL = "book/createOrUpdateBookForm";
+
 
     public BookController(BookService bookService, BookCommandToBook bookCommandToBook)
     {
@@ -75,7 +76,9 @@ public class BookController
             return RECIPE_RECIPEFORM_URL;
         }
 
-        Book savedBook = bookService.save(bookCommandToBook.convert(bookCommand));
+
+        Book convertedBook = bookCommandToBook.convert(bookCommand);
+        Book savedBook = bookService.save(convertedBook);
 
         return "redirect:/book/" + savedBook.getId() + "/show";
     }
