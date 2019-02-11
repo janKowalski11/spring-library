@@ -6,6 +6,7 @@ Date: 05.02.2019
 
 import com.example.library.converters.BookCommandToBook;
 import com.example.library.commands.BookCommand;
+import com.example.library.converters.BookToBookCommand;
 import com.example.library.model.Book;
 import com.example.library.services.BookService;
 import org.springframework.stereotype.Controller;
@@ -24,14 +25,16 @@ public class BookController
 {
     private final BookService bookService;
     private final BookCommandToBook bookCommandToBook;
+    private final BookToBookCommand bookToBookCommand;
 
     private static final String RECIPE_RECIPEFORM_URL = "book/createOrUpdateBookForm";
 
 
-    public BookController(BookService bookService, BookCommandToBook bookCommandToBook)
+    public BookController(BookService bookService, BookCommandToBook bookCommandToBook, BookToBookCommand bookToBookCommand)
     {
         this.bookService = bookService;
         this.bookCommandToBook = bookCommandToBook;
+        this.bookToBookCommand = bookToBookCommand;
     }
 
     @InitBinder
@@ -60,6 +63,14 @@ public class BookController
     public String initCreationForm(Model model)
     {
         model.addAttribute("book", new BookCommand());
+        return RECIPE_RECIPEFORM_URL;
+    }
+
+    @GetMapping("/{bookId}/update")
+    public String initUpdateForm(@PathVariable Long bookId, Model model)
+    {
+
+        model.addAttribute("book", bookToBookCommand.convert(bookService.findById(bookId)));
         return RECIPE_RECIPEFORM_URL;
     }
 

@@ -26,7 +26,7 @@ public class BookCommandToBook implements Converter<BookCommand, Book>
         this.authorService = authorService;
     }
 
-    public Set<Author> getAuthorSet(BookCommand bookCommand)
+    private Set<Author> getAuthorSet(BookCommand bookCommand)
     {
         //todo write test fot this,
 
@@ -78,19 +78,6 @@ public class BookCommandToBook implements Converter<BookCommand, Book>
         book.setAuthorSet(this.getAuthorSet(bookCommand));
 
         return book;
-    }
-
-    public static void main(String[] args)
-    {
-        final String authorLastNames = "Mickiewicz,Zulczyk";
-
-        BookCommand bookCommand = new BookCommand();
-        bookCommand.setDescription("ESSSSSA");
-        bookCommand.setName("CSACASCAS");
-        bookCommand.setPublisher("SAsasasasas");
-        bookCommand.setAuthorLastName(authorLastNames);
-
-
     }
 
 

@@ -16,6 +16,20 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
+<style>
+    .button {
+        background-color: #008CBA;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+</style>
 <body>
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
@@ -108,14 +122,14 @@
                                 <ul>
                                     <li th:remove="all">borrowing one</li>
                                     <li th:remove="all">borrowing two</li>
-                                    <!--li th:each="ingredient : ${recipe.ingredients}"
-                                        th:text="${(ingredient.getAmount() +
-                                        ' ' + ingredient.unitOfMeasure.getDescription() +
-                                        ' - ' + ingredient.getDescription())}" -->
                                 </ul>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div>
+                    <a class="button"
+                       th:href="@{'/book/' + ${book.id} + '/update'}" role="button">Edit</a>
                 </div>
             </div>
         </div>
