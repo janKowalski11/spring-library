@@ -46,8 +46,12 @@ public class BookController
     @GetMapping({"", "/"})
     public String listBooks(Model model)
     {
+        //sorting books to display
         Set<Book> sortedBooks = new TreeSet<>(bookService.findAll());
         model.addAttribute("books", sortedBooks);
+
+        //initiating search
+        model.addAttribute("bookToFind", new BookCommand());
 
         return "book/booksPage";
     }
@@ -87,11 +91,34 @@ public class BookController
             return RECIPE_RECIPEFORM_URL;
         }
 
-
         Book convertedBook = bookCommandToBook.convert(bookCommand);
         Book savedBook = bookService.save(convertedBook);
 
         return "redirect:/book/" + savedBook.getId() + "/show";
+    }
+
+    @GetMapping("/find")
+    public String processFinding( @ModelAttribute("bookToFind") BookCommand bookToFind,
+                                 BindingResult bindingResult, Model model)
+    {
+
+        Set<Book> foundBooks = bookService.findAllByNameLike(bookToFind.getName());
+        if (foundBooks.isEmpty())
+        {
+            bindingResult.rejectValue("name", "not Found", "not found");
+            return "book/booksPage";
+        }
+        else if (foundBooks.size() == 1)
+        {
+            return "redirect:/book/" + foundBooks.iterator().next().getId() + "/show";
+        }
+        else
+        {
+            Set<Book> sortedBooks = new TreeSet<>(foundBooks);
+            model.addAttribute("books",sortedBooks);
+
+            return "book/booksPage";
+        }
     }
 
 

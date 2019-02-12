@@ -57,4 +57,10 @@ public class BookServiceImpl implements BookService
     {
         bookRepository.deleteById(id);
     }
+
+    @Override
+    public Set<Book> findAllByNameLike(String name)
+    {
+        return bookRepository.findAllByNameLike("%" + name + "%");
+    }
 }

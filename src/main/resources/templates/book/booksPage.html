@@ -2,6 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <html>
 <head>
+    <meta charset="UTF-8"/>
+    <title>Library</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+
     <style>
         table {
             border-collapse: collapse;
@@ -20,6 +35,34 @@
         th {
             background-color: #4CAF50;
             color: white;
+        }
+
+        input[type=text] {
+            width: 66%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 3px solid #ababab;
+            -webkit-transition: 0.5s;
+            transition: 0.5s;
+            outline: none;
+        }
+
+        input[type=text]:focus {
+            border: 3px solid #42d12c;
+        }
+
+        .button {
+            background-color: #47ba35;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -40,6 +83,25 @@
         <td th:text="${book.publisher}"> not found</td>
     </tr>
 </table>
-
+<br><br>
+<form th:object="${bookToFind}" th:action="@{/book/find/}" method="get">
+    <input type="hidden" th:field="*{id}"/>
+    <div class="row">
+        <div class="col-md-3 form-group" th:class="${#fields.hasErrors('description')}
+        ? 'col-md-3 form-group has-error' : 'col-md-3 form-group'">
+            <label>Book's Name: </label>
+            <input type="text" class="form-control" th:field="*{name}" placeholder="book's name you need to find"
+                   th:errorclass="has-error">
+            <span class="help-block" th:if="${#fields.hasErrors('description')}">
+                <ul>
+                    <li th:each="err : ${#fields.errors('description')}" th:text="${err}"/>
+                </ul>
+            </span>
+        </div>
+    </div>
+    <div class="row">
+        <input class="button" type="submit" value="Find">
+    </div>
+</form>
 </body>
 </html>
