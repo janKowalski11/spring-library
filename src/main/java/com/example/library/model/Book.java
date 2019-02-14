@@ -26,8 +26,8 @@ public class Book extends BaseEntity
     @Lob
     private Byte[] image;
 
-    @Min(0)
-    private int availableBooks;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
+    private Set<Comment> commentSet = new HashSet<>();
 
 
     @ManyToMany
@@ -110,13 +110,4 @@ public class Book extends BaseEntity
         this.authorSet = authorSet;
     }
 
-    public int getAvailableBooks()
-    {
-        return availableBooks;
-    }
-
-    public void setAvailableBooks(int availableBooks)
-    {
-        this.availableBooks = availableBooks;
-    }
 }
