@@ -97,8 +97,15 @@ public class BookController
         return "redirect:/book/" + savedBook.getId() + "/show";
     }
 
+    @GetMapping("/{bookId}/delete")
+    public String deleteBook(@PathVariable Long bookId)
+    {
+        bookService.deleteById(bookId);
+        return "redirect:/book";
+    }
+
     @GetMapping("/find")
-    public String processFinding( @ModelAttribute("bookToFind") BookCommand bookToFind,
+    public String processFinding(@ModelAttribute("bookToFind") BookCommand bookToFind,
                                  BindingResult bindingResult, Model model)
     {
 
@@ -115,7 +122,7 @@ public class BookController
         else
         {
             Set<Book> sortedBooks = new TreeSet<>(foundBooks);
-            model.addAttribute("books",sortedBooks);
+            model.addAttribute("books", sortedBooks);
 
             return "book/booksPage";
         }

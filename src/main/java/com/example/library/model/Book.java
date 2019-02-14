@@ -110,4 +110,13 @@ public class Book extends BaseEntity
         this.authorSet = authorSet;
     }
 
+    public Set<Comment> getCommentSet()
+    {
+        return commentSet;
+    }
+
+    public void setCommentSet(Set<Comment> commentSet)
+    {
+        this.commentSet = commentSet;
+    }
 }
