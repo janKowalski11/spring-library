@@ -83,6 +83,10 @@
         <td th:text="${book.publisher}"> not found</td>
     </tr>
 </table>
+<div class="col-md-10">
+    <a class="button"
+       th:href="@{'/book/new'}" role="button">New Book</a>
+</div>
 <br><br>
 <form th:object="${bookToFind}" th:action="@{/book/find/}" method="get">
     <input type="hidden" th:field="*{id}"/>
