@@ -24,6 +24,7 @@ import java.util.TreeSet;
 
 @Controller
 @RequestMapping("/book")
+@SessionAttributes("book")
 public class BookController
 {
     private final BookService bookService;
