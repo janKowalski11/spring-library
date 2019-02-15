@@ -38,11 +38,11 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-10">
                                 <h1 class="panel-title" th:text="${book.name}">Book Name</h1>
                             </div>
                             <div class="col-md-1">
-                                <a class="btn btn-default" href="#"
+                                <a class="btn btn-default"
                                    th:href="@{'/book/' + ${book.id} + '/image'}" th:method="get" role="button">Change
                                     Image</a>
                             </div>
@@ -57,7 +57,7 @@
                                 <ul>
                                     <li th:remove="all">author one</li>
                                     <li th:remove="all">author two</li>
-                                    <li th:each="author : ${book.authorSet}">
+                                    <li th:each="author : ${book.getSortedAuthorSet()}">
                                         <a th:text="${author.lastName}"
                                            th:href="@{'/author/' + ${author.id} + '/show/'}"></a>
                                     </li>
@@ -66,7 +66,7 @@
                             <div class="col-md-6">
                                 <img
                                         th:src="@{'/recipe/' + ${book.id} + '/recipe_image'}" th:method="get"
-                                        width="200" height="200">
+                                        width="400" height="200">
                             </div>
                         </div>
                         <div class="row">
@@ -111,19 +111,31 @@
                                 <h1 class="panel-title">Comments</h1>
                             </div>
                             <div class="col-md-1">
-                                <a class="btn btn-default" href="#"
-                                   th:href="@{'/book/' + ${book.id} + '/comments'}" role="button">Show</a>
+                                <a class="btn btn-default" th:href="@{'/book/' + ${book.id} + '/comment/new'}"
+                                   role="button">New</a>
                             </div>
                         </div>
                     </div>
                     <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <ul>
-                                    <li th:remove="all">comment one</li>
-                                    <li th:remove="all">comment two</li>
-                                </ul>
-                            </div>
+                        <div class="table-responsive" th:if="${not #lists.isEmpty(book.commentSet)}">
+                            <table class="table table-hover ">
+                                <thead class="thead-inverse">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Description</th>
+                                    <th>User</th>
+                                    <th>View</th>
+                                </tr>
+                                </thead>
+                                <tr th:each="comment : ${book.getSortedCommentSet()}">
+                                    <td th:text="${comment.id}">1</td>
+                                    <td th:text="${comment.user} ">User</td>
+                                    <td th:text=" ${comment.content}">Comment BYQU</td>
+                                    <td><a href="#"
+                                           th:href="@{'/book/' + ${book.id} + '/comment/' + ${comment.id} + '/show'}">View</a>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>

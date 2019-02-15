@@ -20,7 +20,7 @@ public class Comment extends BaseEntity
 {
 
     @NotNull
-    @DateTimeFormat(pattern = "yyyyMMdd")
+    @DateTimeFormat(pattern = "dd-mm-yy")
     private LocalDate whenAdded;
 
     @Lob
@@ -32,6 +32,17 @@ public class Comment extends BaseEntity
 
     @ManyToOne
     private Book book;
+
+    public Comment addBook(Book book)
+    {
+        if (book == null)
+            throw new IllegalArgumentException("book you are tyring to add comment to is null");
+
+        book.getCommentSet().add(this);
+        this.book = book;
+
+        return this;
+    }
 
     public LocalDate getWhenAdded()
     {
@@ -62,4 +73,15 @@ public class Comment extends BaseEntity
     {
         this.user = user;
     }
+
+    public Book getBook()
+    {
+        return book;
+    }
+
+    public void setBook(Book book)
+    {
+        this.book = book;
+    }
+
 }

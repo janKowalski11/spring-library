@@ -50,6 +50,16 @@ public class Book extends BaseEntity
 
     }
 
+    public Set<Author> getSortedAuthorSet()
+    {
+        return new TreeSet<>(authorSet);
+    }
+
+    public Set<Comment> getSortedCommentSet()
+    {
+        return new TreeSet<>(commentSet);
+    }
+
     public String getName()
     {
         return name;
