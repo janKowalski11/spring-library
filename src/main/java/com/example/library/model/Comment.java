@@ -44,6 +44,11 @@ public class Comment extends BaseEntity
         return this;
     }
 
+    public Long getOwningBooksId()
+    {
+        return book.getId();
+    }
+
     public LocalDate getWhenAdded()
     {
         return whenAdded;

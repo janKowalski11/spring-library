@@ -19,6 +19,9 @@ import javax.validation.Valid;
 import java.util.Set;
 import java.util.TreeSet;
 
+//todo EDITING Book is BUGGed,fix
+//, probably there is some issue with template !
+
 @Controller
 @RequestMapping("/book")
 public class BookController

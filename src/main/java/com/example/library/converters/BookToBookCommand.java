@@ -7,6 +7,7 @@ Date: 11.02.2019
 import com.example.library.commands.BookCommand;
 import com.example.library.model.Author;
 import com.example.library.model.Book;
+import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -34,6 +35,7 @@ public class BookToBookCommand implements Converter<Book, BookCommand>
         return authorsLastNames;
     }
 
+    @Synchronized
     @Override
     public BookCommand convert(Book book)
     {

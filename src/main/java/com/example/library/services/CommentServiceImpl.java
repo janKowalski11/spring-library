@@ -9,6 +9,7 @@ import com.example.library.model.Comment;
 import com.example.library.repositories.BookRepository;
 import com.example.library.repositories.CommentRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -41,6 +42,7 @@ public class CommentServiceImpl implements CommentService
     }
 
     @Override
+    @Transactional
     public Comment save(Comment obj)
     {
 

@@ -65,7 +65,7 @@
                             </div>
                             <div class="col-md-6">
                                 <img
-                                        th:src="@{'/recipe/' + ${book.id} + '/recipe_image'}" th:method="get"
+                                        th:src="@{'/book/' + ${book.id} + '/book_image'}" th:method="get"
                                         width="400" height="200">
                             </div>
                         </div>
@@ -121,19 +121,19 @@
                             <table class="table table-hover ">
                                 <thead class="thead-inverse">
                                 <tr>
-                                    <th>ID</th>
+                                    <th>Date</th>
                                     <th>User</th>
                                     <th>Description</th>
-                                    <th>View</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                 </tr>
                                 </thead>
                                 <tr th:each="comment : ${book.getSortedCommentSet()}">
-                                    <td th:text="${comment.id}">1</td>
+                                    <td th:text="${comment.whenAdded}">12.04.1992</td>
                                     <td th:text="${comment.user} ">User</td>
                                     <td th:text=" ${comment.content}">Comment BYQU</td>
-                                    <td><a href="#"
-                                           th:href="@{'/book/' + ${book.id} + '/comment/' + ${comment.id} + '/show'}">View</a>
-                                    </td>
+                                    <td><a th:href="@{'/book/' + ${book.id} + '/comment/' + ${comment.id} + '/update'}">Edit</a></td>
+                                    <td><a th:href="@{'/book/' + ${book.id} + '/comment/' + ${comment.id} + '/delete'}">Delete</a></td>
                                 </tr>
                             </table>
                         </div>

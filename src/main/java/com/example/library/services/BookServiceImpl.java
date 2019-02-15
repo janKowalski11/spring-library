@@ -8,6 +8,7 @@ import com.example.library.model.Author;
 import com.example.library.model.Book;
 import com.example.library.repositories.BookRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.HashSet;
@@ -47,6 +48,7 @@ public class BookServiceImpl implements BookService
     }
 
     @Override
+    @Transactional
     public Book save(Book book)
     {
         return bookRepository.save(book);

@@ -9,7 +9,6 @@ import com.example.library.model.Book;
 import com.example.library.model.Comment;
 import com.example.library.services.AuthorService;
 import com.example.library.services.BookService;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -39,15 +38,20 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>
         book1.setPublisher("Ciemna Strefa");
 
         Comment comment1=new Comment();
-        comment1.setContent("Zajbista fchuj mordeczko polecam");
+        comment1.setContent("Zajbista fchuj mordeczko polecam,Zajbista fchuj mordeczko polecam,Zajbista fchuj" +
+                " mordeczko polecam,Zajbista fchuj mordeczko polecam,Zajbista fchuj mordeczko polecam,Zajbista " +
+                "fchuj mordeczko polecam,Zajbista fchuj mordeczko polecam,Zajbista fchuj mordeczko polecam,Zajbista" +
+                " fchuj mordeczko polecam,Zajbista fchuj mordeczko polecam,Zajbista fchuj mordeczko polecam," +
+                "Zajbista fchuj mordeczko polecam,Zajbista fchuj mordeczko polecam,Zajbista fchuj mordeczko polecam," +
+                "Zajbista fchuj mordeczko polecam," );
         comment1.setUser("DobryChlopak321");
-        comment1.setWhenAdded(LocalDate.now());
+        comment1.setWhenAdded(LocalDate.of(2019, 02, 13));
         comment1.addBook(book1);
 
         Comment comment2=new Comment();
         comment2.setContent("Essa dobre");
         comment2.setUser("sssw4");
-        comment2.setWhenAdded(LocalDate.now());
+        comment2.setWhenAdded(LocalDate.of(2019, 02, 13));
         comment2.addBook(book1);
 
 
@@ -65,7 +69,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>
         Comment comment3=new Comment();
         comment3.setContent("O KURWA ALE to jest dobre");
         comment3.setUser("byqu");
-        comment3.setWhenAdded(LocalDate.now());
+        comment3.setWhenAdded(LocalDate.of(2019, 02, 13));
         comment3.addBook(book2);
 
         Author author1=new Author();
