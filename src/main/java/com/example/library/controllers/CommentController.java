@@ -18,6 +18,7 @@ import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/book/{bookId}/comment")
+@SessionAttributes("comment")
 public class CommentController
 {
 

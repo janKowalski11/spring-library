@@ -24,7 +24,7 @@ import java.util.TreeSet;
 
 @Controller
 @RequestMapping("/book")
-@SessionAttributes("book")
+@SessionAttributes("book")// THIS Annotation fixed updating bug that duplicated entities instead of updating
 public class BookController
 {
     private final BookService bookService;
