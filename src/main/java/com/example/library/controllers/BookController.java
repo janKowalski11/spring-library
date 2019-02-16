@@ -19,12 +19,18 @@ import javax.validation.Valid;
 import java.util.Set;
 import java.util.TreeSet;
 
-//todo EDITING Book is BUGGed,fix
-//, probably there is some issue with template !
+
+/*
+@SessionAttributes("book") Annotation fixed updating bug that duplicated entities
+instead of updating, because fields of book not included in the form(create or update book
+form.html), are set as null, for example id. To prevent this we need session attributes. W innych moich projektach
+nie ma tego problemu poniewaz tam forma zapelnia wszystkie pola oprocz id, i widocznie w moim forncie
+<input type hidden  id> musi byc zjebane bo id jest ustawiane na null
+*/
 
 @Controller
 @RequestMapping("/book")
-@SessionAttributes("book")// THIS Annotation fixed updating bug that duplicated entities instead of updating
+@SessionAttributes("book")
 public class BookController
 {
     private final BookService bookService;

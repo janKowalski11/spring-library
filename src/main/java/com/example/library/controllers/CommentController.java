@@ -42,7 +42,6 @@ public class CommentController
     }
 
 
-
     @GetMapping("/new")
     public String initCreationForm(Model model, @PathVariable Long bookId)
     {
@@ -54,12 +53,12 @@ public class CommentController
         comment.addBook(bookService.findById(bookId));
         comment.setWhenAdded(LocalDate.now());
 
-        model.addAttribute("comment",comment);
+        model.addAttribute("comment", comment);
 
         return COMMENT_FORM_URL;
     }
 
-    //TODO FIX UPDATE BUG
+
     @GetMapping("/{commentId}/update")
     public String initUpdateForm(Model model, @PathVariable Long commentId)
     {
@@ -81,5 +80,16 @@ public class CommentController
         commentService.save(comment);
         return "redirect:/book/" + comment.getOwningBooksId() + "/show";
 
+    }
+
+    //todo ADD DELETE COMMENT FUNCTION, just commit it
+    //todo add image handling
+
+
+    @GetMapping("/{commentId}/delete")
+    public String deleteComment(@PathVariable Long commentId, @PathVariable String bookId)
+    {
+        commentService.deleteById(commentId);
+        return "redirect:/book/" + bookId + "/show";
     }
 }
