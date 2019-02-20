@@ -18,7 +18,7 @@ import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/book/{bookId}/comment")
-@SessionAttributes("comment")
+@SessionAttributes("comment") ///https://stackoverflow.com/a/4914150
 public class CommentController
 {
 
@@ -82,7 +82,7 @@ public class CommentController
 
     }
 
-    //todo ADD DELETE COMMENT FUNCTION, just commit it
+
     //todo add image handling
 
 
